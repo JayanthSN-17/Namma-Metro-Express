@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#001B6B"
+    android:padding="24dp">
+
+    <ImageView
+        android:layout_width="216dp"
+        android:layout_height="216dp"
+        android:src="@drawable/train3d" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Namma Platform\nನಮ್ಮ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Local Railway Assistant\nನಿಮ್ಮ ಸ್ಥಳೀಯ ರೈಲ್ವೆ ಸಹಾಯಕ"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/nameInput"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:hint="Enter Your Name"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BBBBBB"
+        android:padding="15dp"
+        android:backgroundTint="#FFD600"/>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:text="LOGIN"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="#000000"
+        android:backgroundTint="#FFD600"/>
+
+</LinearLayout>
