@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namma Metro App</title>
+    <style>
+        :root {
+            --metro-blue: #001B6B;
+            --metro-yellow: #FFD600;
+            --white: #FFFFFF;
+            --gray: #BBBBBB;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container simulating a mobile device */
+        .app-container {
+            width: 100%;
+            max-width: 412px;
+            height: 90vh;
+            background-color: var(--metro-blue);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 20px;
+            overflow-y: auto;
+            position: relative;
+            color: var(--white);
+        }
+
+        .screen {
+            display: none;
+            padding: 24px;
+            min-height: 100%;
+            box-sizing: border-box;
+            flex-direction: column;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* Common Elements */
+        h1 { font-size: 32px; font-weight: bold; margin: 10px 0; text-align: center; line-height: 1.2; }
+        h2 { font-size: 22px; color: var(--metro-yellow); margin-top: 30px; font-weight: bold; }
+        p { font-size: 18px; margin: 5px 0; text-align: center; }
+        
+        input, select {
+            width: 100%;
+            height: 60px;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            border: none;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 100%;
+            height: 60px;
+            background-color: var(--metro-yellow);
+            color: black;
+            border: none;
+            border-radius: 4px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 25px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        .btn:active { background-color: #e6c200; }
+
+        /* Login Screen Specific */
+        .logo-box { text-align: center; margin-top: 40px; }
+        .logo-img { font-size: 120px; }
+        .login-input { background: none; border-bottom: 2px solid var(--metro-yellow); color: white; border-radius: 0; }
+        .login-input::placeholder { color: var(--gray); }
+
+        /* Coach Layout Specific */
+        .coach-row { display: flex; justify-content: center; gap: 10px; margin-top: 25px; }
+        .coach {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .coach.yellow { background-color: var(--metro-yellow); }
+        .coach.white { background-color: var(--white); }
+
+        /* Price Screen Specific */
+        .price-text { font-size: 60px; color: var(--metro-yellow); font-weight: bold; text-align: center; margin: 40px 0; }
+        .details-label { font-size: 22px; margin-top: 15px; text-align: left; }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- 1. LOGIN SCREEN -->
+        <div id="login-screen" class="screen active">
+            <div class="logo-box">
+                <div class="logo-img">🚆</div>
+                <h1>Namma Platform<br>ನಮ್ಮ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್</h1>
+                <p>Your Local Railway Assistant<br>ನಿಮ್ಮ ಸ್ಥಳೀಯ ರೈಲ್ವೆ ಸಹಾಯಕ</p>
+            </div>
+            <input type="text" id="userName" class="login-input" placeholder="Enter Your Name" style="margin-top: 60px;">
+            <button class="btn" onclick="navigateTo('select-screen')">LOGIN</button>
+        </div>
+
+        <!-- 2. SELECT TRAIN SCREEN -->
+        <div id="select-screen" class="screen">
+            <h1>Select Train & Location<br>ರೈಲು ಮತ್ತು ಸ್ಥಳ ಆಯ್ಕೆಮಾಡಿ</h1>
+            
+            <h2>Select Train<br>ರೈಲು ಆಯ್ಕೆಮಾಡಿ</h2>
+            <select id="trainSelect">
+                <option>Mysuru Express</option>
+                <option>Siddaganga Express</option>
+                <option>Tippu Express</option>
+            </select>
+
+            <h2>Your Current Location<br>ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಸ್ಥಳ</h2>
+            <input type="text" placeholder="Bengaluru" value="Bengaluru">
+
+            <button class="btn" onclick="navigateTo('details-screen')">NEXT / ಮುಂದೆ</button>
+        </div>
+
+        <!-- 3. TRAIN DETAILS SCREEN -->
+        <div id="details-screen" class="screen" style="justify-content: center;">
+            <h1>Train Details<br>ರೈಲು ವಿವರಗಳು</h1>
+            
+            <div style="color: var(--metro-yellow); font-size: 24px; text-align: center; margin: 40px 0;">
+                Platform: 2<br>
+                Coach Position: Pillar 3
+            </div>
+
+            <button class="btn" onclick="playAnnouncement()">ANNOUNCE / ಘೋಷಣೆ</button>
+            <button class="btn" onclick="navigateTo('coach-screen')" style="margin-top: 20px;">VIEW COACH LAYOUT</button>
+        </div>
+
+        <!-- 4. COACH LAYOUT SCREEN -->
+        <div id="coach-screen" class="screen">
+            <h1>Coach Layout & Arrival<br>ಕೋಚ್ ವಿನ್ಯಾಸ ಮತ್ತು ಆಗಮನ</h1>
+            
+            <h2 style="margin-top: 30px;">🚆 Mysuru Express</h2>
+            <p style="text-align: left; font-size: 22px;">Next Arrival: 30 Minutes<br>ಮುಂದಿನ ಆಗಮನ: 30 ನಿಮಿಷ</p>
+            <p style="text-align: left; font-size: 22px; color: var(--metro-yellow);">Platform: 2</p>
+
+            <h2 style="margin-top: 40px; color: white;">Coach Layout</h2>
+            <div class="coach-row">
+                <div class="coach yellow">GEN</div>
+                <div class="coach white">S1</div>
+                <div class="coach yellow">S2</div>
+                <div class="coach white">A1</div>
+            </div>
+
+            <button class="btn" onclick="playAnnouncement()" style="margin-top: 40px;">NEXT TRAIN ANNOUNCEMENT<br>ಮುಂದಿನ ರೈಲು ಘೋಷಣೆ</button>
+            <button class="btn" onclick="navigateTo('price-screen')" style="margin-top: 20px;">VIEW TICKET PRICE<br>ಟಿಕೆಟ್ ದರ ನೋಡಿ</button>
+        </div>
+
+        <!-- 5. TICKET PRICE SCREEN -->
+        <div id="price-screen" class="screen">
+            <h1>Ticket Price<br>ಟಿಕೆಟ್ ದರ</h1>
+            
+            <div class="details-label" style="margin-top: 40px;">From: Bengaluru<br>ಇಂದ: ಬೆಂಗಳೂರು</div>
+            <div class="details-label">To: Mysuru<br>ಗೆ: ಮೈಸೂರು</div>
+            <div class="details-label">Class: Second Class<br>ದ್ವಿತೀಯ ವರ್ಗ</div>
+            <div class="details-label">Passengers: 1</div>
+
+            <div class="price-text">₹145</div>
+
+            <button class="btn" onclick="confirmTicket()">CONFIRM / ದೃಢೀಕರಿಸಿ</button>
+            <button class="btn" onclick="navigateTo('login-screen')" style="background: none; border: 1px solid var(--metro-yellow); color: var(--metro-yellow); margin-top: 20px;">BACK TO HOME</button>
+        </div>
+
+    </div>
+
+    <script>
+        function navigateTo(screenId) {
+            // Hide all screens
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => screen.classList.remove('active'));
+            
+            // Show the selected screen
+            const target = document.getElementById(screenId);
+            if (target) {
+                target.classList.add('active');
+                // Scroll container to top
+                document.querySelector('.app-container').scrollTop = 0;
+            }
+        }
+
+        function playAnnouncement() {
+            const text = "ಮೈಸೂರು ಎಕ್ಸ್‌ಪ್ರೆಸ್ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ 2ಕ್ಕೆ ಬರುತ್ತಿದೆ. ಜನರಲ್ ಕೋಚ್ ಪಿಲ್ಲರ್ 3 ಬಳಿ ಇರುತ್ತದೆ.";
+            
+            // Use Web Speech API
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'kn-IN'; // Kannada
+                window.speechSynthesis.speak(utterance);
+                alert("Playing Announcement: \n" + text);
+            } else {
+                alert("Speech Synthesis not supported in this browser. \nText: " + text);
+            }
+        }
+
+        function confirmTicket() {
+            alert("Ticket Confirmed! Have a safe journey.");
+            navigateTo('login-screen');
+        }
+    </script>
+</body>
+</html>
